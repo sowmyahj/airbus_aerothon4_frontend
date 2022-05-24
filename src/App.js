@@ -8,7 +8,7 @@ function App() {
   },[])
   return (
     <div className="App">
-     <a href="?fe=react&be=node&projName=react_node">Download React & Node</a>
+     <a href="http://localhost:1080?fe=react&be=node&projName=react_node">Download React & Node</a>
     </div>
   );
 }
