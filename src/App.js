@@ -4,9 +4,9 @@ const  baseUrl = "http://localhost:3002"
 
 function App() {
   const [projectName, setProjectName] = useState("");
-  const [frontEnd, setFrontEnd] = useState("React");
-  const [backEnd, setBackEnd] = useState("Node");
-  const [db, setDb] = useState("MongoDB");
+  const [frontEnd, setFrontEnd] = useState("react");
+  const [backEnd, setBackEnd] = useState("node");
+  const [db, setDb] = useState("mongodb");
   const [api,setApi] =useState("");
 
   useEffect(()=>{
