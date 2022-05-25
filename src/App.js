@@ -65,10 +65,10 @@ function App() {
               value={frontEnd}
               onChange={(e) => setFrontEnd(e.target.value)}
             >
-              <option value="React">React</option>
-              <option value="Angular">Angular</option>
-              <option value="Vue">Vue</option>
-              <option value="HTML">HTML</option>
+              <option value="react">React</option>
+              <option value="angular">Angular</option>
+              <option value="vue">Vue</option>
+              <option value="html">HTML</option>
             </select>
           </div>
           <br />
@@ -83,10 +83,10 @@ function App() {
               value={backEnd}
               onChange={(e) => setBackEnd(e.target.value)}
             >
-              <option value="Node">Node(Express)</option>
-              <option value="SpringBoot">SpringBoot</option>
-              <option value="Django">Django</option>
-              <option value="Flask">Flask</option>
+              <option value="node">Node(Express)</option>
+              <option value="springboot">SpringBoot</option>
+              <option value="django">Django</option>
+              <option value="flask">Flask</option>
             </select>
           </div>
           <br />
@@ -99,8 +99,8 @@ function App() {
               value={db}
               onChange={(e) => setDb(e.target.value)}
             >
-              <option value="MongoDB">MongoDB</option>
-              <option value="MySql">MySql</option>
+              <option value="mongodb">MongoDB</option>
+              <option value="mysql">MySql</option>
             </select>
           </div>
           <br />
