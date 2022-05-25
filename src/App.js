@@ -1,11 +1,35 @@
 import "./App.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+const  baseUrl = "http://localhost:3002"
 
 function App() {
   const [projectName, setProjectName] = useState("");
   const [frontEnd, setFrontEnd] = useState("React");
   const [backEnd, setBackEnd] = useState("Node");
   const [db, setDb] = useState("MongoDB");
+  const [api,setApi] =useState("");
+
+  useEffect(()=>{
+    setApi(`${baseUrl}?fe=${frontEnd}&be=${backEnd}&db=${db}&projName=${projectName}`);
+    console.log(api)
+  },[projectName,frontEnd,backEnd,db])
+
+  const validateProjName=()=>{
+    const regex = /[^-A-Za-z0-9_]/;
+    if (
+      projectName.trim() === "" ||
+      projectName.length > 30 ||
+      regex.test(projectName)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  const showAlert = (e) =>{
+    e.preventDefault();
+    window.alert("Please enter a valid project name.");
+  }
 
   async function download(e) {
     e.preventDefault();
@@ -19,17 +43,19 @@ function App() {
       setProjectName("");
       return;
     }
-
-    let url =
-      "/api/downloadProject/" +
-      projectName +
-      "/" +
-      frontEnd +
-      "/" +
-      backEnd +
-      "/" +
-      db;
-    fetch(url);
+    // http://localhost:1080?fe=react&be=node&projName=react_node
+    // let url =
+    //   "/api/downloadProject/" +
+    //   projectName +
+    //   "/" +
+    //   frontEnd +
+    //   "/" +
+    //   backEnd +
+    //   "/" +
+    //   db;
+    // let url = `http://localhost:3002?fe=${frontEnd}&be=${backEnd}&db=${db}&projectName=${projectName}`
+              
+    // fetch(url);
   }
 
   return (
@@ -105,10 +131,15 @@ function App() {
           </div>
           <br />
           <br />
-          <button className="btn btn-primary">
-            {" "}
-            Download starter project{" "}
-          </button>
+          {
+            validateProjName(projectName)?
+              <a href={api} className="btn btn-primary"> Download starter project</a>
+              :
+              <button className="btn btn-primary" onClick={(e)=>showAlert(e)}>
+                {" "}
+                Download starter project{" "}
+              </button>
+          }
         </form>
       </div>
     </div>
