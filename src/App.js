@@ -1,11 +1,13 @@
 import "./App.css";
 import { useState } from "react";
+import { SpinnerCircular } from 'spinners-react';
 
 function App() {
   const [projectName, setProjectName] = useState("");
   const [frontEnd, setFrontEnd] = useState("react");
   const [backEnd, setBackEnd] = useState("node");
   const [db, setDb] = useState("mongodb");
+  const [loading,setLoading] = useState(false);
 
   async function download(e) {
     e.preventDefault();
@@ -20,7 +22,7 @@ function App() {
       return;
     }
     let url =
-      "https://airbus-99.herokuapp.com/api/downloadProject/" +
+    "https://airbus-99.herokuapp.com/api/downloadProject/" +
       projectName +
       "/" +
       frontEnd +
@@ -30,6 +32,7 @@ function App() {
       db;
 
     try {
+      setLoading(true);
       const response = await fetch(url);
       if (response.ok || response.status === 304) {
         const zipFile = await response.blob();
@@ -40,12 +43,14 @@ function App() {
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
+        setLoading(false);
       } else if (response.status === 404) {
         throw await response.text();
       } else {
         throw "Server error";
       }
     } catch (error) {
+      setLoading(false);
       alert(" Unable to download. ERROR " + error);
     }
   }
@@ -127,6 +132,7 @@ function App() {
           <button className="btn btn-primary">
             {" "}
             Download starter project{" "}
+            <SpinnerCircular enabled={loading} size = {22} сolor={"white"} secondaryColor="#b5bdb8" thickness={130}/>
           </button>
         </form>
       </div>
