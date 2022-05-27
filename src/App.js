@@ -20,7 +20,7 @@ function App() {
       return;
     }
     let url =
-      "/api/downloadProject/" +
+      "https://airbus-99.herokuapp.com/api/downloadProject/" +
       projectName +
       "/" +
       frontEnd +
