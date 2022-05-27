@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import "./App.css";
 import { useState } from "react";
 
