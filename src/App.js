@@ -1,11 +1,44 @@
 import "./App.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+const  baseUrl ="https://airbus-99.herokuapp.com"
 
 function App() {
   const [projectName, setProjectName] = useState("");
   const [frontEnd, setFrontEnd] = useState("react");
   const [backEnd, setBackEnd] = useState("node");
   const [db, setDb] = useState("mongodb");
+  const [api,setApi] =useState("");
+
+  useEffect(()=>{
+    setApi(`
+    ${baseUrl}`+ "/api/downloadProject/" +
+    projectName +
+    "/" +
+    frontEnd +
+    "/" +
+    backEnd +
+    "/" +
+    db
+    );
+    console.log(api)
+  },[projectName,frontEnd,backEnd,db])
+
+  const validateProjName=()=>{
+    const regex = /[^-A-Za-z0-9_]/;
+    if (
+      projectName.trim() === "" ||
+      projectName.length > 30 ||
+      regex.test(projectName)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  const showAlert = (e) =>{
+    e.preventDefault();
+    window.alert("Please enter a valid project name.");
+  }
 
   async function download(e) {
     e.preventDefault();
@@ -19,35 +52,19 @@ function App() {
       setProjectName("");
       return;
     }
-    let url =
-      "/api/downloadProject/" +
-      projectName +
-      "/" +
-      frontEnd +
-      "/" +
-      backEnd +
-      "/" +
-      db;
-
-    try {
-      const response = await fetch(url);
-      if (response.ok || response.status === 304) {
-        const zipFile = await response.blob();
-        const zipFileURL = URL.createObjectURL(zipFile);
-        const link = document.createElement("a");
-        link.href = zipFileURL;
-        link.setAttribute("download", projectName);
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-      } else if (response.status === 404) {
-        throw await response.text();
-      } else {
-        throw "Server error";
-      }
-    } catch (error) {
-      alert(" Unable to download. ERROR " + error);
-    }
+    // http://localhost:1080?fe=react&be=node&projName=react_node
+    // let url =
+    //   "/api/downloadProject/" +
+    //   projectName +
+    //   "/" +
+    //   frontEnd +
+    //   "/" +
+    //   backEnd +
+    //   "/" +
+    //   db;
+    // let url = `http://localhost:3002?fe=${frontEnd}&be=${backEnd}&db=${db}&projectName=${projectName}`
+              
+    // fetch(url);
   }
 
   return (
@@ -123,10 +140,15 @@ function App() {
           </div>
           <br />
           <br />
-          <button className="btn btn-primary">
-            {" "}
-            Download starter project{" "}
-          </button>
+          {
+            validateProjName(projectName)?
+              <a href={api} className="btn btn-primary"> Download starter project</a>
+              :
+              <button className="btn btn-primary" onClick={(e)=>showAlert(e)}>
+                {" "}
+                Download starter project{" "}
+              </button>
+          }
         </form>
       </div>
     </div>
