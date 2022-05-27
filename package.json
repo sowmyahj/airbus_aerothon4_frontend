@@ -36,5 +36,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3002"
+  "proxy": "https://airbus-99.herokuapp.com/" ,
+  "comments": {
+    "proxy": "Change proxy to http://localhost:3002 to run local"
+  }
+  
 }
