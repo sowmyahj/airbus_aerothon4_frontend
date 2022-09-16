@@ -58,7 +58,7 @@ function App() {
   return (
     <div>
       <header className="App-header">
-        <h1> AIRBUS Aerothon 4.0 - Web application toolkit </h1>
+        <h1> Web application toolkit </h1>
       </header>
       <div className="App-form">
         <form onSubmit={(e) => download(e)}>
