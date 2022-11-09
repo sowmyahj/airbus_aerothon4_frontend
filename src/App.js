@@ -22,7 +22,7 @@ function App() {
       return;
     }
     let url =
-      "https://airbus-aerothon4-teamproj.herokuapp.com/api/downloadProject/" +
+      "https://airbus-aerothon4-temproj-backe.herokuapp.com/api/downloadProject/" +
       projectName +
       "/" +
       frontEnd +
