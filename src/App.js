@@ -1,13 +1,13 @@
 import "./App.css";
 import { useState } from "react";
-import { SpinnerCircular } from 'spinners-react';
+import { SpinnerCircular } from "spinners-react";
 
 function App() {
   const [projectName, setProjectName] = useState("");
   const [frontEnd, setFrontEnd] = useState("react");
   const [backEnd, setBackEnd] = useState("node");
   const [db, setDb] = useState("mongodb");
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function download(e) {
     e.preventDefault();
@@ -22,7 +22,7 @@ function App() {
       return;
     }
     let url =
-    "https://airbus-99.herokuapp.com/api/downloadProject/" +
+      "https://airbus-aerothon4-teamproj.herokuapp.com/api/downloadProject/" +
       projectName +
       "/" +
       frontEnd +
@@ -132,7 +132,13 @@ function App() {
           <button className="btn btn-primary">
             {" "}
             Download starter project{" "}
-            <SpinnerCircular enabled={loading} size = {22} сolor={"white"} secondaryColor="#b5bdb8" thickness={130}/>
+            <SpinnerCircular
+              enabled={loading}
+              size={22}
+              сolor={"white"}
+              secondaryColor="#b5bdb8"
+              thickness={130}
+            />
           </button>
         </form>
       </div>
